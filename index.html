@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Google Apps Script Web App</title>
+</head>
+<body>
+  <h1>Interact with Google Apps Script</h1>
+  <button onclick="fetchData()">Fetch Data</button>
+  <div id="response"></div>
+
+  <script>
+    async function fetchData() {
+      const url = 'https://script.google.com/macros/s/AKfycbwFOJ3rFd3xCLm31IXmM3m5piLP5uz7E0d2XsSdnXLbI43I_NFePOksSSHb4ZsOFcQ9/exec';
+      try {
+        const response = await fetch(url, {
+          method: 'GET', // or 'POST' depending on your Apps Script
+          headers: { 'Content-Type': 'application/json' }
+        });
+        const data = await response.json();
+        document.getElementById('response').innerText = JSON.stringify(data);
+      } catch (error) {
+        console.error('Error:', error);
+        document.getElementById('response').innerText = 'Error fetching data';
+      }
+    }
+  </script>
+</body>
+</html>
